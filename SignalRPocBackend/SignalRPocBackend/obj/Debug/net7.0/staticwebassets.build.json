@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "lrVg4pLm4xn4Im67XT95wjynwEVHcsPySaLHCqLMJaA=",
+  "Source": "SignalRPocBackend",
+  "BasePath": "_content/SignalRPocBackend",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
