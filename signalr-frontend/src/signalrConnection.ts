@@ -3,7 +3,8 @@ const URL = "https://localhost:7139/chatHub"; //or whatever your backend port is
 class Connector {
     private connection: signalR.HubConnection;
     public events: (onMessageReceived: (message: string) => void,
-        onUserMessageReceived: (message: string) => void
+        onUserMessageReceived: (message: string) => void,
+        onUserLeftMessageReceived: (message: string) => void
         // onConnected:() => void
     ) => void;
     static instance: Connector;
@@ -13,12 +14,15 @@ class Connector {
             .withAutomaticReconnect()
             .build();
         this.connection.start().catch(err => document.write(err));
-        this.events = (onMessageReceived, onUserMessageReceived) => {
+        this.events = (onMessageReceived, onUserMessageReceived, onUserLeftMessageReceived) => {
             this.connection.on("ReceiveMessage", (message) => {
                 onMessageReceived(message);
             });
             this.connection.on("SendMessage", (message) => {
                 onUserMessageReceived(message)
+            })
+            this.connection.on("UserLeft",(message) => {
+                onUserLeftMessageReceived(message)
             })
         };
     }

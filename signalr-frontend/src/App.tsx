@@ -16,7 +16,10 @@ function App() {
       console.log(message)
       setMsgList([...msgList,message])
     }
-    events(handleMessageReceived ,handleUserMessageReceived );
+    const handleUserLeft = (message:string) => {
+      setJoinedUser([...joinedUser,message])
+    }
+    events(handleMessageReceived ,handleUserMessageReceived, handleUserLeft );
   });
   return (
     <div className="">
@@ -36,7 +39,7 @@ function App() {
       }}>send</button>
       <ul>
         {
-          joinedUser.map((msg,idx) => <li key={idx} style={{color:"green"}}>{msg}</li>)
+          joinedUser.map((msg,idx) => <li key={idx} style={msg.endsWith("Joined") ? {color:"green"} : {color:"red"}}>{msg}</li>)
         }
       </ul>
       <ul>
